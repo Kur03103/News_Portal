@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from newspaper.forms import ContactForm  
 from newspaper.models import Advertisement, Contact, Tag
 
+
 class SidebarMixin:
 
     def get_context_data(self, **kwargs):
@@ -113,3 +114,23 @@ class ContactCreateView(SuccessMessageMixin, CreateView):
             "There was an error sending your message. Please check the form.",
         )
         return super().form_invalid(form)
+
+
+
+
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+from django.views.generic import ListView
+from .models import Tag, Category   # adjust if your model is named differently
+
+class AllTagsView(ListView):
+    model = Tag
+    template_name = "all_tags.html"
+    context_object_name = "tags"
+    success_url = reverse_lazy('all-tags')
+
+class AllCategoriesView(ListView):
+    model = Category
+    template_name = "all_categories.html"  # create this template
+    context_object_name = "categories"
