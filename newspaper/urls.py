@@ -11,6 +11,7 @@ urlpatterns = [
     path("about/", views.AboutView.as_view(), name="about"),
     path("tags/", AllTagsView.as_view(), name="all-tags"),
     path("categories/", AllCategoriesView.as_view(), name="all-categories"),
+    
 
 
 ]

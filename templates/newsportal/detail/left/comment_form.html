@@ -1,3 +1,4 @@
+{% if request.user.is_authenticated %}            
             <h3 class="mb-4 section-title">
               <span>User Comments (3)</span>
             </h3>
@@ -14,3 +15,4 @@
                 <button type="submit" class="btn btn-success">Post Comment</button>
               </form>
             </div>
+{% endif %}

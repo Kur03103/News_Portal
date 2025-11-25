@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from django.utils import timezone
 from datetime import timedelta
 from .models import Post
-from newspaper.models import Advertisement
+from newspaper.models import Advertisement, OurTeam
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -122,7 +122,7 @@ class AboutView(TemplateView):
     template_name = "about.html"
 
 from django.views.generic import ListView
-from .models import Tag, Category   # adjust if your model is named differently
+from .models import Tag, Category   
 
 class AllTagsView(ListView):
     model = Tag
@@ -132,5 +132,15 @@ class AllTagsView(ListView):
 
 class AllCategoriesView(ListView):
     model = Category
-    template_name = "all_categories.html"  # create this template
+    template_name = "all_categories.html"  
     context_object_name = "categories"
+
+
+class AboutView(TemplateView):
+    template_name = "newsportal/about.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["our_teams"] = OurTeam.objects.all()
+        return context
